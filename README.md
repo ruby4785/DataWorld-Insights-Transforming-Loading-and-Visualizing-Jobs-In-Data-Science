@@ -19,39 +19,36 @@
 ## Snowflake SQL Commands
 
 -- Create a warehouse
+(
 create warehouse jobswarehouse
     warehouse_size = 'X-SMALL'
     auto_suspend = 1800  -- Auto-suspend time in seconds (optional)
     auto_resume = true;  -- Auto-resume (optional)
+)
     
-drop database if exists s3_to_snowflake;
+(drop database if exists s3_to_snowflake;)
 
-use role accountadmin;
+(use role accountadmin;)
+
 --Database Creation 
-create database if not exists s3_to_snowflake;
+(create database if not exists s3_to_snowflake;)
 
 --Specify the active/current database for the session.
-use s3_to_snowflake;
+(use s3_to_snowflake;)
 
-
-
-
-create or replace stage s3_to_snowflake.PUBLIC.snow_simple url="s3://data-jobs/output_folder/" 
+(create or replace stage s3_to_snowflake.PUBLIC.snow_simple url="s3://data-jobs/output_folder/"
 credentials=(aws_key_id='Your AWS Key'
 aws_secret_key='Your AWS Access Key');
-
-
-
-list @s3_to_snowflake.PUBLIC.snow_simple;
+list @s3_to_snowflake.PUBLIC.snow_simple;)
 
 --File Format Creation
-create or replace file format my_parquet_format
-type = parquet;
+(create or replace file format my_parquet_format
+type = parquet;)
 
 
 
 --Table Creation
-CREATE OR REPLACE EXTERNAL TABLE s3_to_snowflake.PUBLIC.Jobs_dataset (
+(CREATE OR REPLACE EXTERNAL TABLE s3_to_snowflake.PUBLIC.Jobs_dataset (
    
     work_year VARCHAR(20) AS (VALUE:work_year::VARCHAR(20)),
     job_title VARCHAR(100) AS (VALUE:job_title::VARCHAR(100)),
@@ -70,6 +67,6 @@ CREATE OR REPLACE EXTERNAL TABLE s3_to_snowflake.PUBLIC.Jobs_dataset (
     salary_bin VARCHAR(50) AS (VALUE:salary_bin::VARCHAR(50))
   )
 WITH LOCATION = @s3_to_snowflake.PUBLIC.snow_simple
-FILE_FORMAT = 'my_parquet_format';
+FILE_FORMAT = 'my_parquet_format';)
 
 

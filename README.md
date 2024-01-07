@@ -37,8 +37,10 @@ create database if not exists s3_to_snowflake;
 use s3_to_snowflake;
 
 create or replace stage s3_to_snowflake.PUBLIC.snow_simple url="s3://data-jobs/output_folder/"
+
 credentials=(aws_key_id='Your AWS Key'
 aws_secret_key='Your AWS Access Key');
+
 list @s3_to_snowflake.PUBLIC.snow_simple;
 
 ### File Format Creation

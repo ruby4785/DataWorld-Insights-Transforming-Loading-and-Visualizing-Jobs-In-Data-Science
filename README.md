@@ -11,4 +11,5 @@ Simple overview of use/purpose.
 ●	Built tailored visualizations by loading data from Snowflake into Tableau dashboard containing 4-5 key insights enabling users to explore trends and patterns within the data.
 
 #Airflow DAG
+![Image](Airflow DAG.png)
 
